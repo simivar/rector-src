@@ -209,8 +209,8 @@
         }
     },
     "config": {
-        "sort-packages": true,
         "platform-check": false,
+        "sort-packages": true,
         "allow-plugins": {
             "phpstan/extension-installer": true,
             "rector/extension-installer": true,
