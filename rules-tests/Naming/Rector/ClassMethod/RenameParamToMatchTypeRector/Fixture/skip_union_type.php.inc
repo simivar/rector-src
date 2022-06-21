@@ -1,6 +1,6 @@
 <?php
 
-namespace Rector\Tests\Naming\Rector\ClassMethod\RenameParamToMatchTypeRector\FixturePhp80;
+namespace Rector\Tests\Naming\Rector\ClassMethod\RenameParamToMatchTypeRector\Fixture;
 
 use Rector\Tests\Naming\Rector\ClassMethod\RenameParamToMatchTypeRector\Source\EliteManager;
 
