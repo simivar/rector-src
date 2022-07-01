@@ -86,8 +86,6 @@ CODE_SAMPLE
 
         dump($scalarReturnType);
         die;
-
-        return $node;
     }
 
     public function provideMinPhpVersion(): int
