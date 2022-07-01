@@ -8,28 +8,32 @@ use PhpParser\Node\Expr;
 use PhpParser\Node\Expr\Closure;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Function_;
+use PHPStan\Type\Type;
 use Rector\TypeDeclaration\TypeAnalyzer\AlwaysStrictBoolExprAnalyzer;
 
-final class StrictBoolReturnTypeAnalyzer
+final class StrictScalarReturnTypeAnalyzer
 {
     public function __construct(
+        private readonly AlwaysStrictReturnAnalyzer $alwaysStrictReturnAnalyzer,
         private readonly AlwaysStrictBoolExprAnalyzer $alwaysStrictBoolExprAnalyzer,
-        private readonly AlwaysStrictReturnAnalyzer $alwaysStrictReturnAnalyzer
     ) {
     }
 
-    public function hasAlwaysStrictBoolReturn(ClassMethod|Closure|Function_ $functionLike): bool
+    public function matchAlwaysScalarReturnType(ClassMethod|Closure|Function_ $functionLike): ?Type
     {
         $returns = $this->alwaysStrictReturnAnalyzer->matchAlwaysStrictReturns($functionLike);
         if ($returns === null) {
-            return false;
+            return null;
         }
 
         foreach ($returns as $return) {
             // we need exact expr return
             if (! $return->expr instanceof Expr) {
-                return false;
+                return null;
             }
+
+            dump($return->expr);
+            die;
 
             if (! $this->alwaysStrictBoolExprAnalyzer->isStrictBoolExpr($return->expr)) {
                 return false;
